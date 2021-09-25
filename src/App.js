@@ -6,6 +6,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import Page_Name_Reducer from './Redux/Reducers/Page_Name_Reducer'
 import User_Data_Reducer from './Redux/Reducers/User_Data_Reducer'
+import Login_Reducer from './Redux/Reducers/Login_Reducer'
 import i18n from 'i18next'
 import { useTranslation, initReactI18next } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
@@ -14,6 +15,7 @@ import { useSelector, useDispatch } from 'react-redux'
 const appReducer = combineReducers({
   Page_Name_Reducer: Page_Name_Reducer,
   User_Data_Reducer: User_Data_Reducer,
+  Login_Reducer: Login_Reducer,
 
 })
 const rootReducer = (state, action) => {
@@ -33,6 +35,7 @@ i18n
           'Login': 'Login Page',
           'Language': 'Language',
           'LoginT': 'Login',
+          'Welcome': 'Please login to continue!',
 
         }
       },
@@ -42,6 +45,8 @@ i18n
           'Login': 'Giriş Sayfası',
           'Language': 'Dil',
           'LoginT': 'Giriş Yap',
+          'Welcome': 'Lütfen devam etmek için giriş yapınız!',
+
         }
       }
     },

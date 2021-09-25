@@ -8,9 +8,11 @@ import { useTranslation, initReactI18next } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import Select from 'react-select'
 import i18next from 'i18next'
+import Login_Action from '../../Redux/Actions/Login_Action'
 
 
 export default () => {
+  const [state, setState] = useState(false)
   const dispatch = useDispatch()
   const Language = useSelector((state) => state.Page_Name_Reducer.data)
   const UserInfo = useSelector((state) => state.User_Data_Reducer.data)
@@ -25,6 +27,12 @@ export default () => {
     { value: 'en', label: 'English' },
 
   ]
+  const ButtonStatus = () => {
+    setState(!state)
+  }
+  useEffect(() => {
+    dispatch(Login_Action(state))
+  }, [state])
   return (
     <div className='components-navbar'>
       <div className='components-navbar-leftside'>
@@ -37,8 +45,8 @@ export default () => {
             <Home style={{ marginRight: '10px' }} />
             <ContactUs style={{ marginRight: '40px' }} />
           </div>
-          : <p className='components-navbar-t2'>{t('LoginT')}</p>}
-        <Select placeholder={t('Language')} options={options} onChange={(e) => i18next.changeLanguage(e.value)} />
+          : <p className='components-navbar-t2' style={{ borderWidth: state ? '2px' : '1px' }} onClick={ButtonStatus}>{t('LoginT')}</p>}
+        <Select className='x' placeholder={t('Language')} options={options} onChange={(e) => i18next.changeLanguage(e.value)} />
       </div>
     </div>
   )
