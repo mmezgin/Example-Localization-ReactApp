@@ -19,6 +19,7 @@ export default () => {
   const [user, setUser] = useState()
   const history = useHistory()
   const dispatch = useDispatch()
+
   const mailInput = () => {
     setMailState(true)
     setPwState(false)

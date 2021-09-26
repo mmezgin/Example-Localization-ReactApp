@@ -11,20 +11,8 @@ import Login_Reducer from './Redux/Reducers/Login_Reducer'
 import i18n from 'i18next'
 import { useTranslation, initReactI18next } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
-
-
-const appReducer = combineReducers({
-  Page_Name_Reducer: Page_Name_Reducer,
-  User_Data_Reducer: User_Data_Reducer,
-  Login_Reducer: Login_Reducer,
-
-})
-const rootReducer = (state, action) => {
-  if (action.type === 'DATA_TRANSFER') {
-    state = undefined
-  }
-  return appReducer(state, action)
-}
+import { store, persistedStore } from './Redux/Stores/Store'
+import { PersistGate } from 'redux-persist/integration/react'
 
 i18n
   .use(initReactI18next)
@@ -65,20 +53,22 @@ i18n
     },
     lng: 'en',
     fallbackLng: 'en',
-  });
+  })
+
 
 function App() {
   const { t } = useTranslation();
-  const store = createStore(rootReducer, applyMiddleware(thunk))
 
   return (
     <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route exact path='/' component={LoginModule} />
-          <Route exact path='/Dashboard' component={Dashboard} />
-        </Switch>
-      </Router>
+      <PersistGate loading={null} persistor={persistedStore}>
+        <Router>
+          <Switch>
+            <Route exact path='/' component={LoginModule} />
+            <Route exact path='/Dashboard' component={Dashboard} />
+          </Switch>
+        </Router>
+      </PersistGate>
     </Provider>
   );
 }
