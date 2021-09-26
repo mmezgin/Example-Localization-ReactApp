@@ -36,6 +36,9 @@ i18n
           'Language': 'Language',
           'LoginT': 'Login',
           'Welcome': 'Please login to continue!',
+          'Mail': 'E-Mail',
+          'Pw': 'Password',
+          'PwForgotten': 'Forgot your password?',
 
         }
       },
@@ -46,6 +49,10 @@ i18n
           'Language': 'Dil',
           'LoginT': 'Giriş Yap',
           'Welcome': 'Lütfen devam etmek için giriş yapınız!',
+          'Mail': 'E-Posta',
+          'Pw': 'Şifre',
+          'PwForgotten': 'Şifrenizi mi unuttunuz?',
+
 
         }
       }
@@ -54,14 +61,9 @@ i18n
     fallbackLng: 'en',
   });
 
-
-
 function App() {
   const { t } = useTranslation();
   const store = createStore(rootReducer, applyMiddleware(thunk))
-
-
-
 
   return (
     <Provider store={store}>

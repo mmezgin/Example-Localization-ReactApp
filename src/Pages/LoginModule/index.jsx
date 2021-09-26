@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NavBar from '../../Components/NavBar'
 import './login.styles.scss'
+import LoginModal from './LoginModal'
 import { useTranslation, initReactI18next } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -11,7 +12,7 @@ const Login = () => {
   return (
     <div className='login-main'>
       <NavBar />
-      {!ButtonStatus ? <p className='login-t1'>{t('Welcome')}</p> : <div />}
+      {!ButtonStatus ? <p className='login-t1'>{t('Welcome')}</p> : <LoginModal />}
     </div>
   )
 
