@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { ProtectedRoute } from './routes/ProtectedRoute'
 import LoginModule from './Pages/LoginModule'
+import Dashboard from './Pages/Dashboard'
 import { Provider, useStore } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
@@ -34,11 +35,14 @@ i18n
           'hi': 'hello',
           'Login': 'Login Page',
           'Language': 'Language',
+          'Dashboard': 'Dashboard',
           'LoginT': 'Login',
           'Welcome': 'Please login to continue!',
           'Mail': 'E-Mail',
           'Pw': 'Password',
+          'Title': 'Scorpion',
           'PwForgotten': 'Forgot your password?',
+          'ScorpionText': 'Scorpions are predatory arachnids of the order Scorpiones. They have eight legs, and are easily recognized by a pair of grasping pincers and a narrow, segmented tail, often carried in a characteristic forward curve over the back and always ending with a stinger. The evolutionary history of scorpions goes back 435 million years. They mainly live in deserts but have adapted to a wide range of environmental conditions, and can be found on all continents except Antarctica. There are over 2,500 described species, with 22 extant (living) families recognized to date. Their taxonomy is being revised to account for 21st-century genomic studies.'
 
         }
       },
@@ -46,13 +50,15 @@ i18n
         translation: {
           'hi': 'Merhaba',
           'Login': 'Giriş Sayfası',
+          'Dashboard': 'Anasayfa',
+          'Title': 'Akrep',
           'Language': 'Dil',
           'LoginT': 'Giriş Yap',
           'Welcome': 'Lütfen devam etmek için giriş yapınız!',
           'Mail': 'E-Posta',
           'Pw': 'Şifre',
           'PwForgotten': 'Şifrenizi mi unuttunuz?',
-
+          'ScorpionText': 'Akrep, örümceğimsiler sınıfının Scorpiones takımını oluşturan genellikle sıcak ve nemli bölgelerde yaşayan vücutları sert kitin bir tabaka ile örtülü kıvrık ve kalkık kuyruğunda zehir iğnesi bulunan eklembacaklılara verilen ad.2009 yılı rakamlarına göre akreplerin yaşayan 1753 türü bulunur.Türkiye"de 11 cinste toplanan 23 türü bulunur. Dünyanın en uzun birinci akrebi 23 cm boyuyla Heterometrus swammerdami, ikincisi ise 20 cm boyuyla Pandinus imperator türleridir Teraryumda bakılan bazı akrepler 8 yıla kadar yaşasa da doğada ömürleri bundan daha kısadır.Akrepler araknoloji bilim dalı içerisinde araknologlar tarafından incelenir.'
 
         }
       }
@@ -70,6 +76,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path='/' component={LoginModule} />
+          <Route exact path='/Dashboard' component={Dashboard} />
         </Switch>
       </Router>
     </Provider>

@@ -5,14 +5,14 @@
   flex-direction: row;
   background-color: #1f263e;
   height: 80px;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   align-items: center;
   justify-content: space-between;
   -webkit-box-shadow: 2px 35px 84px 5px rgba(105,110,126,0.76);
--moz-box-shadow: 2px 35px 84px 5px rgba(105,110,126,0.76);
-box-shadow: 2px 35px 84px 5px rgba(105,110,126,0.76);
+  -moz-box-shadow: 2px 35px 84px 5px rgba(105,110,126,0.76);
+  box-shadow: 2px 35px 84px 5px rgba(105,110,126,0.76);
 }
 .components-navbar-t1{
   font-family: OpenSans;

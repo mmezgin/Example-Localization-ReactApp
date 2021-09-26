@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import NavBar from '../../Components/NavBar'
 import './login.styles.scss'
 import { useTranslation, initReactI18next } from 'react-i18next'
+import User_Data_Action from '../../Redux/Actions/User_Data_Action'
+import Page_Name_Action from '../../Redux/Actions/Page_Name_Action'
 import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router';
 
 export default () => {
   const { t } = useTranslation();
@@ -12,9 +15,10 @@ export default () => {
   const [mail, setMail] = useState('')
   const [pw, setPw] = useState('')
   const [success, setSuccess] = useState('initial')
-  const [success2, setSuccess2] = useState('initial')
   const [rnd, setRnd] = useState()
-
+  const [user, setUser] = useState()
+  const history = useHistory()
+  const dispatch = useDispatch()
   const mailInput = () => {
     setMailState(true)
     setPwState(false)
@@ -24,39 +28,28 @@ export default () => {
     setMailState(false)
     setPwState(true)
   }
-  const loginAttempt = () => {
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].email == mail && users[i].password == pw) {
-        setSuccess2('Success')
-      }
-    }
-    success != 'initial' ? '' :
-      success == 'Success' ? '' :
-        setSuccess('Fail')
 
+  const loginAttempt = () => {
+    let userMail = users.filter(user => user.email == mail);
+    let userPw = users.filter(user => user.password == pw);
+    userMail[0]?.id == userPw[0]?.id ? setSuccess('success') : setSuccess('fail')
+    if (userMail[0]?.id == userPw[0]?.id) {
+      setUser(userMail[0])
+    }
   }
   useEffect(() => {
-    console.log(success)
+    if (success == 'success' && user) {
+      let theUser = user
+      user.isLoggedIn = true
+      setUser(user)
+      console.log(user)
+      dispatch(User_Data_Action(user))
+      dispatch(Page_Name_Action('Dashboard'))
+      history.push('/Dashboard')
+    }
+    setSuccess('initial')
   }, [success])
 
-  const users = [
-    {
-      id: 1,
-      email: 'mert_ezgin@scorp.com',
-      password: '123456',
-      fullName: 'Mert Mehmet Ezgin',
-      phoneNumber: '05533570887',
-      countryCode: 'tr'
-    },
-    {
-      id: 2,
-      email: 'john_mcsmith@scorp.com',
-      password: '654321',
-      fullName: 'John Mcsmith',
-      phoneNumber: '123456789',
-      countryCode: 'en'
-    },
-  ]
   return (
     <div className='login-loginmodal-con'>
       <p className='login-loginmodal-t1'>{t('LoginT')}</p>
@@ -84,8 +77,26 @@ export default () => {
       <div className='login-loginmodal-button' onClick={loginAttempt}>
         <p className='login-loginmodal-t2'>{t('LoginT')}</p>
       </div>
-      <p className='login-loginmodal-t3'>{t('PwForgotten')} </p>
+      <p className='login-loginmodal-t3'>{t('PwForgotten')}</p>
     </div>
   )
-
 }
+
+export const users = [
+  {
+    id: 1,
+    email: 'mert_ezgin@scorp.com',
+    password: '123456',
+    fullName: 'Mert Mehmet Ezgin',
+    phoneNumber: '05533570887',
+    countryCode: 'tr'
+  },
+  {
+    id: 2,
+    email: 'john_mcsmith@scorp.com',
+    password: '654321',
+    fullName: 'John Mcsmith',
+    phoneNumber: '123456789',
+    countryCode: 'en'
+  },
+]

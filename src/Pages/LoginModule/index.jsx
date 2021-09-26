@@ -5,17 +5,20 @@ import LoginModal from './LoginModal'
 import { useTranslation, initReactI18next } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 
-const Login = () => {
-  const { t } = useTranslation();
-  const ButtonStatus = useSelector((state) => state.Login_Reducer.data)
 
+export default () => {
+  const [state, setState] = useState(false)
+  const { t } = useTranslation();
+  const [type, setType] = useState(1)
+  const ButtonStatus = useSelector((state) => state.Login_Reducer.data)
+  const pull_data = (data) => {
+    setState(data)
+  }
   return (
     <div className='login-main'>
-      <NavBar />
-      {!ButtonStatus ? <p className='login-t1'>{t('Welcome')}</p> : <LoginModal />}
+      <NavBar func={pull_data} />
+      {!state ? <p className='login-t1'>{t('Welcome')}</p> : <LoginModal />}
     </div>
   )
 
 }
-
-export default Login

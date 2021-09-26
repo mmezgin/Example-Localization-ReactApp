@@ -5,13 +5,12 @@ import Scorpion from '../../SVG/Scorpion'
 import Home from '../../SVG/Home'
 import ContactUs from '../../SVG/ContactUs'
 import { useTranslation, initReactI18next } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
 import Select from 'react-select'
 import i18next from 'i18next'
 import Login_Action from '../../Redux/Actions/Login_Action'
+import { useHistory } from 'react-router-dom'
 
-
-export default () => {
+export default (props) => {
   const [state, setState] = useState(false)
   const dispatch = useDispatch()
   const Language = useSelector((state) => state.Page_Name_Reducer.data)
@@ -21,6 +20,7 @@ export default () => {
   const navigateTool = () => {
     history.push('/Tool')
   }
+  console.log(UserInfo)
 
   const options = [
     { value: 'tr', label: 'Türkçe' },
@@ -31,8 +31,9 @@ export default () => {
     setState(!state)
   }
   useEffect(() => {
-    dispatch(Login_Action(state))
+    props.func(state)
   }, [state])
+
   return (
     <div className='components-navbar'>
       <div className='components-navbar-leftside'>
