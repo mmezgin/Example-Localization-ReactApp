@@ -12,14 +12,21 @@ export default () => {
   const ButtonStatus = useSelector((state) => state.Login_Reducer.data)
   const [mailState, setMailState] = useState(false)
   const [pwState, setPwState] = useState(false)
+  const [msg, setMsg] = useState(false)
   const [mail, setMail] = useState('')
   const [pw, setPw] = useState('')
   const [success, setSuccess] = useState('initial')
   const [rnd, setRnd] = useState()
+  const [attempt, setAttempt] = useState(0)
+  const [userInfo, setUserInfo] = useState(false)
   const [user, setUser] = useState()
   const history = useHistory()
   const dispatch = useDispatch()
 
+  const printUsers = () => {
+    setUserInfo(!userInfo)
+    console.log(users)
+  }
   const mailInput = () => {
     setMailState(true)
     setPwState(false)
@@ -31,12 +38,14 @@ export default () => {
   }
 
   const loginAttempt = () => {
+    setAttempt(1)
     let userMail = users.filter(user => user.email == mail);
     let userPw = users.filter(user => user.password == pw);
     userMail[0]?.id == userPw[0]?.id ? setSuccess('success') : setSuccess('fail')
     if (userMail[0]?.id == userPw[0]?.id) {
       setUser(userMail[0])
     }
+    console.log(success)
   }
   useEffect(() => {
     if (success == 'success' && user) {
@@ -47,6 +56,8 @@ export default () => {
       dispatch(User_Data_Action(user))
       dispatch(Page_Name_Action('Dashboard'))
       history.push('/Dashboard')
+    } else if (attempt == 1) {
+      setMsg(true)
     }
     setSuccess('initial')
   }, [success])
@@ -82,11 +93,16 @@ export default () => {
           }}
         />
       </div>
+
       <div style={{ marginTop: '40px' }} />
       <div className='login-loginmodal-button' onClick={loginAttempt}>
         <p className='login-loginmodal-t2'>{t('LoginT')}</p>
       </div>
-      <p className='login-loginmodal-t3'>{t('PwForgotten')}</p>
+      <p onClick={printUsers} className='login-loginmodal-t3'>{t('PwForgotten')}</p>
+      <div>
+        {userInfo ? <p style={{ color: 'green' }}> {t('FeedBack')} </p> : <div />}
+        {msg ? <p style={{ color: 'red' }}> {t('Incorrect')} </p> : <div />}
+      </div>
     </div>
   )
 }

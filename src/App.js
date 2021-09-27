@@ -41,6 +41,7 @@ i18n
           'CountryField': 'Country Code',
           'Code': 'Code',
           'Send': 'Send',
+          'Incorrect': 'Incorrect E-Mail or Password!',
           'TextField': 'Your Message',
           'FeedBack': 'Check your browser console!',
         }
@@ -49,6 +50,7 @@ i18n
         translation: {
           'hi': 'Merhaba',
           'Login': 'Giriş Sayfası',
+          'Incorrect': 'E-Posta veya Şifreniz Hatalı!',
           'Send': 'Gönder',
           'LogoutT': 'Çıkış',
           'Dashboard': 'Anasayfa',
