@@ -62,7 +62,11 @@ export default () => {
           onBlur={(e) => {
             setMail(e.target.value)
             setMailState(false)
-          }} />
+          }}
+          onFocus={(e) => {
+            setMailState(false)
+          }}
+        />
       </div>
       <div style={{ marginTop: '20px' }} />
       <div className='login-loginmodal-input-con'
@@ -72,7 +76,11 @@ export default () => {
           onBlur={(e) => {
             setPw(e.target.value)
             setPwState(false)
-          }} />
+          }}
+          onFocus={(e) => {
+            setMailState(false)
+          }}
+        />
       </div>
       <div style={{ marginTop: '40px' }} />
       <div className='login-loginmodal-button' onClick={loginAttempt}>

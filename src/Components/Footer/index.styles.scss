@@ -1,0 +1,33 @@
+.components-footer{
+  display: flex;
+  width:100%;
+  flex-direction: row;
+  background-color: #282e42;
+  height: 60px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+}
+.components-footer-t{
+  color: #ffffff;
+  animation-name:components-footer-t-animation ;
+  animation-duration: 10s;
+  font-weight: bold;
+  font-size: 18px;
+  animation-iteration-count: infinite;
+}
+@keyframes components-footer-t-animation {
+  0%   {color: #FF3C42;}
+  10%   {color: #FD61EE;}
+  20%   {color: #A26EFF;}
+  30%   {color: #09DAFE;}
+  40%   {color: #56D8AA;}
+  50%   {color: #8ACC47;}
+  60%   {color: #B4C741;}
+  70%   {color: #FEBB40;}
+  80%   {color: #FE883B;}
+  90%   {color: #FE883B;}
+  100%   {color: #FE4FA7;}
+}

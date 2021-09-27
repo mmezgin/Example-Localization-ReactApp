@@ -1,0 +1,28 @@
+menuState ?
+        <Menu onClick={() => setMenuState(!menuState)} />
+        : <div className='components-navbar-rightside'>
+          <Menu onClick={() => setMenuState(!menuState)} opacity={0.5} />
+          {UserInfo.isLoggedIn ?
+            <div className='components-navbar-icon-con'>
+              <Home onClick={() => {
+                dispatch(Page_Name_Action('Dashboard'))
+                history.push('/Dashboard')
+              }} />
+              <ContactUs onClick={() => {
+                dispatch(Page_Name_Action('ContactUs'))
+                history.push('/ContactUs')
+              }} />
+              {!modalIsOpen ?
+                <p className='components-navbar-t2' onClick={toggleModal}>{UserInfo.fullName}</p> :
+                <div className='components-navbar-con3'>
+                  <p className='components-navbar-t2' onClick={toggleModal}>{UserInfo.email}</p>
+                  <LogoutIcon onClick={Logout} />
+                </div>
+              }
+              <Select className='components-navbar-select' placeholder={t('Language')} options={options} onChange={(e) => i18next.changeLanguage(e.value)} />
+            </div>
+            :
+            <div className='components-navbar-icon-con2'>
+              <p className='components-navbar-t2' style={{ borderWidth: state ? '2px' : '1px' }} onClick={ButtonStatus}>{t('LoginT')}</p>
+              <Select className='components-navbar-select' placeholder={t('Language')} options={options} onChange={(e) => i18next.changeLanguage(e.value)} />
+            </div>

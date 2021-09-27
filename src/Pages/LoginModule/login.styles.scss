@@ -30,7 +30,7 @@
 }
 .login-loginmodal-input{
   background-color:rgba(0, 0, 0, 0);
-  width: 100%;
+  width: 199px;
   font-size: 14px;
   color:#414559;
   border: none;
@@ -93,4 +93,7 @@
 .login-loginmodal-t3:hover{
   border-bottom: 1px solid #5B64B5;
   width: fit-content;
+}
+body::-webkit-scrollbar {
+  display: none;
 }
